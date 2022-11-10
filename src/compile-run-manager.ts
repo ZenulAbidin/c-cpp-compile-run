@@ -6,8 +6,21 @@ import { Configuration } from "./configuration";
 import { parseFile } from "./utils/file-utils";
 import { Result } from "./enums/result";
 import { Notification } from "./notification";
+import fs = require("fs");
 
 export class CompileRunManager {
+
+    async deleteFile(): Promise<Result> {
+        const file = await this.getFile();
+        const exeFile = file.path.replace(/\..*/, ".exe");
+        // If the compilation fails then so will the unlink so just ignore that.
+        try {
+            fs.unlinkSync(exeFile);
+        }
+        catch {}
+        return Result.success;
+    }
+
     public async compile(shouldAskForInputFlags = false) {
         const file = await this.getFile();
         if (file === null) {

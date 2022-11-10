@@ -8,6 +8,7 @@ export function activate(context: ExtensionContext) {
 
     const compile = commands.registerCommand("extension.Compile", async () => {
         await compileRunManager.compile();
+        await compileRunManager.deleteFile();
     });
 
     const run = commands.registerCommand("extension.Run", async () => {
