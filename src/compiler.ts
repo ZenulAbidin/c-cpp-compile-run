@@ -126,6 +126,7 @@ export class Compiler {
         }
 
         outputChannel.clear();
+        outputChannel.show();
         outputChannel.appendLine("Compiling...")
 
         const proccess = spawnSync(`"${this.compiler}"`, compilerArgs, {
@@ -141,10 +142,7 @@ export class Compiler {
 
         if (proccess.status === 0) {
             outputChannel.appendLine(`${this.file.name} compiled successfully`);
-            outputChannel.show();
         } else {
-            outputChannel.show();
-
             Notification.showErrorMessage("Error compiling!");
 
             return Result.error;
