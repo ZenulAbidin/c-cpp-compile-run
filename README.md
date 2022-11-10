@@ -43,6 +43,15 @@ You can also set to save file before compiling.
 | c-cpp-compile-run.should-show-notifications | Whether should show notifications |
 | c-cpp-compile-run.output-location | Custom output location for the compiled file |
 
+For the working directory, the following variables have special meanings:
+
+* `$HOME` resolves to your home folder
+* `$ROOT` resolves to the root folder `/`; on Windows this is equivalent to `C:\`
+* `$PROJECT_ROOT` resolves to your project root folder - if there is no project then it's equivalent to `$ROOT`. Multiple project roots are not supported yet - for now it just uses the first root.
+* `$$` resolves to a literal `$`.
+
+**Important:** Only local folders are supported at the moment.
+
 ## Keybindings
 | Linux  | Windows | Mac | Description  |
 | ------------ | ------------ | ------------ | ------------ |

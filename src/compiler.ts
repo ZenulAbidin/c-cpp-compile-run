@@ -1,5 +1,6 @@
 import { spawnSync } from "child_process";
 import { window } from "vscode";
+import { workspace } from "vscode";
 import { Configuration } from "./configuration";
 import { FileType } from "./enums/file-type";
 import { File } from "./models/file";
@@ -10,6 +11,7 @@ import { Result } from "./enums/result";
 import { isStringNullOrWhiteSpace } from "./utils/string-utils";
 import { Notification } from "./notification";
 import path = require("path");
+import os = require ("os");
 
 export class Compiler {
     private file: File;
@@ -19,15 +21,45 @@ export class Compiler {
     private shouldAskForInputFlags: boolean;
     private shouldAskForWorkingDirectory: boolean;
 
+    resolveEnvs(input: string): string {
+
+        const home = os.homedir();
+        let projectRootArray = workspace.workspaceFolders;
+        let projectRoot = "/";
+        if (projectRootArray) {
+            // The workspace folder sometimes includes the entire
+            // workind folder and not just the project root. Since
+            // we know the name of the project root, we will just
+            // lazily delete everything efter it.
+            // Lazily so that you can still have the project name
+            // as a subdir inside this project, but it also means
+            // you need to make sure the path to your root folder
+            // does not include any parent folders with the same
+            // name.
+            let name = projectRootArray[0].name;
+            let re = new RegExp(`(.*?${name}).*`, "i")
+            projectRoot = projectRootArray[0].uri.path
+                .replace(re, "$1").replace(/\/(\w:)/, "$1");
+        }
+        const root = "/";
+        return input
+            .replace(/\$HOME/, home)
+            .replace(/\$PROJECT_ROOT/, projectRoot)
+            .replace(/\$ROOT/, root)
+            .replace(/\$\$/, "$");
+    }
+
     constructor(file: File, shouldAskForInputFlags: boolean = false,
             shouldAskForWorkingDirectory: boolean = false) {
         this.file = file;
         this.shouldAskForInputFlags = shouldAskForInputFlags;
         this.workingDirectory = Configuration.workingDir();
-        if (!isStringNullOrWhiteSpace(this.workingDirectory)) {
+        if (isStringNullOrWhiteSpace(this.workingDirectory)) {
             this.workingDirectory = this.file.directory;
         }
+
         this.shouldAskForWorkingDirectory = shouldAskForWorkingDirectory;
+        this.workingDirectory = this.resolveEnvs(this.workingDirectory);
     }
 
     async compile(): Promise<Result> {
@@ -55,14 +87,14 @@ export class Compiler {
         if (this.shouldAskForInputFlags) {
             const flags = await promptFlags(this.inputFlags);
             if (!isStringNullOrWhiteSpace(flags)) {
-                this.inputFlags = flags;
+                this.inputFlags = this.resolveEnvs(flags);
             }
         }
 
         if (this.shouldAskForWorkingDirectory) {
             const workDir = await promptFlags(this.workingDirectory);
             if (!isStringNullOrWhiteSpace(workDir)) {
-                this.workingDirectory = workDir;
+                this.workingDirectory = this.resolveEnvs(workDir);
             }
         }
 
@@ -102,13 +134,13 @@ export class Compiler {
         switch (this.file.type) {
             case FileType.c: {
                 this.compiler = Configuration.cCompiler();
-                this.inputFlags = Configuration.cFlags();
+                this.inputFlags = this.resolveEnvs(Configuration.cFlags());
 
                 return Result.success;
             }
             case FileType.cplusplus: {
                 this.compiler = Configuration.cppCompiler();
-                this.inputFlags = Configuration.cppFlags();
+                this.inputFlags = this.resolveEnvs(Configuration.cppFlags());
 
                 return Result.success;
             }
