@@ -22,6 +22,10 @@ export class Configuration {
         return this.getSetting<string>("cpp-flags")?.trim();
     }
 
+    static workingDir(): string {
+        return this.getSetting<string>("working-dir")?.trim();
+    }
+
     static saveBeforeCompile(): boolean {
         return this.getSetting<boolean>("save-before-compile");
     }

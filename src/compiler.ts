@@ -4,7 +4,7 @@ import { Configuration } from "./configuration";
 import { FileType } from "./enums/file-type";
 import { File } from "./models/file";
 import { outputChannel } from "./output-channel";
-import { promptCompiler, promptFlags } from "./utils/prompt-utils";
+import { promptCompiler, promptFlags, promptWorkingDirectory } from "./utils/prompt-utils";
 import { commandExists, isProccessRunning } from "./utils/common-utils";
 import { Result } from "./enums/result";
 import { isStringNullOrWhiteSpace } from "./utils/string-utils";
@@ -15,11 +15,19 @@ export class Compiler {
     private file: File;
     private compiler?: string;
     private inputFlags?: string;
+    private workingDirectory: string;
     private shouldAskForInputFlags: boolean;
+    private shouldAskForWorkingDirectory: boolean;
 
-    constructor(file: File, shouldAskForInputFlags: boolean = false) {
+    constructor(file: File, shouldAskForInputFlags: boolean = false,
+            shouldAskForWorkingDirectory: boolean = false) {
         this.file = file;
         this.shouldAskForInputFlags = shouldAskForInputFlags;
+        this.workingDirectory = Configuration.workingDir();
+        if (!isStringNullOrWhiteSpace(this.workingDirectory)) {
+            this.workingDirectory = this.file.directory;
+        }
+        this.shouldAskForWorkingDirectory = shouldAskForWorkingDirectory;
     }
 
     async compile(): Promise<Result> {
@@ -51,6 +59,13 @@ export class Compiler {
             }
         }
 
+        if (this.shouldAskForWorkingDirectory) {
+            const workDir = await promptFlags(this.workingDirectory);
+            if (!isStringNullOrWhiteSpace(workDir)) {
+                this.workingDirectory = workDir;
+            }
+        }
+
         let compilerArgs;
 
         let outputLocation = Configuration.outputLocation();
@@ -64,7 +79,7 @@ export class Compiler {
             compilerArgs = compilerArgs.concat(this.inputFlags.split(" "));
         }
 
-        const proccess = spawnSync(`"${this.compiler}"`, compilerArgs, { cwd: this.file.directory, shell: true, encoding: "utf-8" });
+        const proccess = spawnSync(`"${this.compiler}"`, compilerArgs, { cwd: this.workingDirectory, shell: true, encoding: "utf-8" });
 
         if (proccess.output.length > 0) {
             outputChannel.appendLine(proccess.output.toLocaleString(), this.file.name);

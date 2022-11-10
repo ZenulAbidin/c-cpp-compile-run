@@ -11,3 +11,7 @@ export async function promptFlags(defaultFlags: string): Promise<string> {
 export async function promptRunArguments(defaultArgs: string): Promise<string> {
     return await window.showInputBox({ prompt: "Arguments", value: defaultArgs });
 }
+
+export async function promptWorkingDirectory(defaultArgs: string): Promise<string> {
+    return await window.showInputBox({ prompt: "Working Directory", value: defaultArgs });
+}
