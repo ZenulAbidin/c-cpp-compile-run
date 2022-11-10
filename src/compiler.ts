@@ -5,7 +5,7 @@ import { Configuration } from "./configuration";
 import { FileType } from "./enums/file-type";
 import { File } from "./models/file";
 import { outputChannel } from "./output-channel";
-import { promptCompiler, promptFlags, promptWorkingDirectory } from "./utils/prompt-utils";
+import { promptCompiler, promptFlags, promptCommonFlags, promptWorkingDirectory } from "./utils/prompt-utils";
 import { commandExists, isProccessRunning } from "./utils/common-utils";
 import { Result } from "./enums/result";
 import { isStringNullOrWhiteSpace } from "./utils/string-utils";
@@ -18,6 +18,8 @@ export class Compiler {
     private compiler?: string;
     private inputFlags?: string;
     private workingDirectory: string;
+    private environmentVariables: any;
+    private compileOnly: boolean;
     private shouldAskForInputFlags: boolean;
     private shouldAskForWorkingDirectory: boolean;
 
@@ -49,10 +51,12 @@ export class Compiler {
             .replace(/\$\$/, "$");
     }
 
-    constructor(file: File, shouldAskForInputFlags: boolean = false,
+    constructor(file: File, compileOnly: boolean = false, shouldAskForInputFlags: boolean = false,
             shouldAskForWorkingDirectory: boolean = false) {
         this.file = file;
+        this.compileOnly = compileOnly;
         this.shouldAskForInputFlags = shouldAskForInputFlags;
+        this.environmentVariables = Configuration.environmentVariables();
         this.workingDirectory = Configuration.workingDir();
         if (isStringNullOrWhiteSpace(this.workingDirectory)) {
             this.workingDirectory = this.file.directory;
@@ -83,7 +87,7 @@ export class Compiler {
 
             return Result.error;
         }
-
+        
         if (this.shouldAskForInputFlags) {
             const flags = await promptFlags(this.inputFlags);
             if (!isStringNullOrWhiteSpace(flags)) {
@@ -92,33 +96,52 @@ export class Compiler {
         }
 
         if (this.shouldAskForWorkingDirectory) {
-            const workDir = await promptFlags(this.workingDirectory);
+            const workDir = await promptWorkingDirectory(this.workingDirectory);
             if (!isStringNullOrWhiteSpace(workDir)) {
                 this.workingDirectory = this.resolveEnvs(workDir);
             }
         }
 
-        let compilerArgs;
+        let compilerArgs = [];
 
         let outputLocation = Configuration.outputLocation();
-        if (outputLocation) {
-            compilerArgs = [`"${this.file.name}"`, "-o", `"${outputLocation}${path.sep}${this.file.executable}"`];
+        if (this.compileOnly) {
+            compilerArgs.push("-c");
+            compilerArgs.push(`"${this.file.name}"`);
+        }
+        else if (outputLocation) {
+            compilerArgs.push(`"${this.file.name}"`);
+            compilerArgs.push("-o");
+            compilerArgs.push(`"${outputLocation}${path.sep}${this.file.executable}"`);
         } else {
-            compilerArgs = [`"${this.file.name}"`, "-o", `"${this.file.executable}"`];
+            compilerArgs.push(`"${this.file.name}"`);
+            compilerArgs.push("-o");
+            compilerArgs.push(`"${this.file.executable}"`);
         }
 
         if (this.inputFlags) {
-            compilerArgs = compilerArgs.concat(this.inputFlags.split(" "));
+            this.inputFlags.split(" ").forEach((a: string) => {
+                compilerArgs.push(a);
+            })
         }
 
-        const proccess = spawnSync(`"${this.compiler}"`, compilerArgs, { cwd: this.workingDirectory, shell: true, encoding: "utf-8" });
+        outputChannel.clear();
+        outputChannel.appendLine("Compiling...")
+
+        const proccess = spawnSync(`"${this.compiler}"`, compilerArgs, {
+            cwd: this.workingDirectory,
+            env: this.environmentVariables,
+            shell: true,
+            encoding: "utf-8"
+        });
 
         if (proccess.output.length > 0) {
             outputChannel.appendLine(proccess.output.toLocaleString(), this.file.name);
         }
 
         if (proccess.status === 0) {
-            Notification.showInformationMessage("Compiled successfully!");
+            outputChannel.appendLine(`${this.file.name} compiled successfully`);
+            outputChannel.show();
         } else {
             outputChannel.show();
 

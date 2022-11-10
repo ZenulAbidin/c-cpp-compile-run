@@ -35,6 +35,7 @@ You can also set to save file before compiling.
 | c-cpp-compile-run.c-compiler | The C compiler path (e.g: /usr/bin/gcc or C:\\TDM-GCC-64\\bin\\gcc.exe) |
 | c-cpp-compile-run.cpp-compiler | The Cpp compiler path (e.g: /usr/bin/g++ C:\\TDM-GCC-64\\bin\\gcc.exe) |
 | c-cpp-compile-run.save-before-compile | Whether should save the file before compiling |
+| c-cpp-compile-run.env-vars | The environment variables to pass to the compiler |
 | c-cpp-compile-run.c-flags | The C flags: e.g. -Wall. default: -Wall -Wextra |
 | c-cpp-compile-run.cpp-flags | The Cpp flags: e.g. -Wall. default: -Wall -Wextra |
 | c-cpp-compile-run.working-dir | The working directory for the compiler. Defaults to the file path |

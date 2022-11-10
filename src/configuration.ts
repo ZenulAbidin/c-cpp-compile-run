@@ -10,6 +10,10 @@ export class Configuration {
         return this.getSetting<string>("c-compiler")?.trim();
     }
 
+    static environmentVariables(): object {
+        return this.getSetting<object>("env-vars");
+    }
+
     static cFlags(): string {
         return this.getSetting<string>("c-flags")?.trim();
     }

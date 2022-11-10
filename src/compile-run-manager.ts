@@ -12,22 +12,79 @@ export class CompileRunManager {
 
     async deleteFile(): Promise<Result> {
         const file = await this.getFile();
-        const exeFile = file.path.replace(/\..*/, ".exe");
-        // If the compilation fails then so will the unlink so just ignore that.
+        
+        // If the compilation fails then so will all these unlinks so just ignore them.
+
+        
+        // Windows program
+        let objFile = file.path.replace(/\..*/, ".exe");
         try {
-            fs.unlinkSync(exeFile);
+            fs.unlinkSync(objFile);
         }
-        catch {}
+        catch {
+        }
+
+        // Windows object file
+        objFile = file.path.replace(/\..*/, ".lib");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+
+        // Windows shared library
+        objFile = file.path.replace(/\..*/, ".dll");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+
+        
+        // Unix object file
+        objFile = file.path.replace(/\..*/, ".o");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+        
+        // Linux shared library
+        objFile = file.path.replace(/\..*/, ".so");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+
+        // Unix static library
+        objFile = file.path.replace(/\..*/, ".a");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+
+        // Nothing at all <Unix binary>
+        objFile = file.path.replace(/\..*/, "");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+
         return Result.success;
     }
 
-    public async compile(shouldAskForInputFlags = false) {
+    public async compile(compileOnly = false, shouldAskForInputFlags = false,
+            shouldAskForWorkingDirectory = false) {
         const file = await this.getFile();
         if (file === null) {
             return;
         }
 
-        const compiler = new Compiler(file, shouldAskForInputFlags);
+        const compiler = new Compiler(file, compileOnly, shouldAskForInputFlags,
+            shouldAskForWorkingDirectory);
         await compiler.compile();
     }
 
@@ -41,13 +98,14 @@ export class CompileRunManager {
         await runner.run(shouldRunInExternalTerminal);
     }
 
-    public async compileRun(shouldAskForInputFlags = false, shouldAskForArgs = false, shouldRunInExternalTerminal = false) {
+    public async compileRun(shouldAskForInputFlags = false, shouldAskForWorkingDirectory = false,
+        shouldAskForArgs = false, shouldRunInExternalTerminal = false) {
         const file = await this.getFile();
         if (file === null) {
             return;
         }
 
-        const compiler = new Compiler(file, shouldAskForInputFlags);
+        const compiler = new Compiler(file, false, shouldAskForInputFlags, shouldAskForWorkingDirectory);
 
         const runner = new Runner(file, shouldAskForArgs);
 

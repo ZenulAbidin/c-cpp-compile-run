@@ -7,7 +7,7 @@ export function activate(context: ExtensionContext) {
     const compileRunManager = new CompileRunManager();
 
     const compile = commands.registerCommand("extension.Compile", async () => {
-        await compileRunManager.compile();
+        await compileRunManager.compile(true);
         await compileRunManager.deleteFile();
     });
 
@@ -16,7 +16,7 @@ export function activate(context: ExtensionContext) {
     });
 
     const compileRun = commands.registerCommand("extension.CompileRun", async () => {
-        await compileRunManager.compileRun(false, false, Configuration.runInExternalTerminal());
+        await compileRunManager.compileRun(false, false, false, Configuration.runInExternalTerminal());
     });
 
     const customCompile = commands.registerCommand("extension.CustomCompile", async () => {
@@ -28,11 +28,11 @@ export function activate(context: ExtensionContext) {
     });
 
     const customCompileRun = commands.registerCommand("extension.CustomCompileRun", async () => {
-        await compileRunManager.compileRun(true, true, Configuration.runInExternalTerminal());
+        await compileRunManager.compileRun(false, true, true, Configuration.runInExternalTerminal());
     });
 
     const compileRunInExternalTerminal = commands.registerCommand("extension.CompileRunInExternalTerminal", async () => {
-        await compileRunManager.compileRun(false, false, true);
+        await compileRunManager.compileRun(false, false, false, true);
     });
 
     context.subscriptions.push(compile);

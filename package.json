@@ -238,6 +238,12 @@
                     "description": "Whether should save the file before compiling",
                     "scope": "resource"
                 },
+                "c-cpp-compile-run.env-vars": {
+                    "type": "object",
+                    "description": "The environment variables to pass to the compiler",
+                    "default": {},
+                    "scope": "resource"
+                },
                 "c-cpp-compile-run.c-flags": {
                     "type": "string",
                     "description": "The C flags: e.g. -Wall. default: -Wall -Wextra",
