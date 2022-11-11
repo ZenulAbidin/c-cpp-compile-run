@@ -1,9 +1,6 @@
 ![Logo](resources/logo.png)
 
 # C/C++ Compile Run extension
-<a href="https://www.buymeacoffee.com/danielpinto8zz6" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.png)](https://www.paypal.me/danielpinto8zz6/)
-
 
 ![Github CI](https://github.com/danielpinto8zz6/c-cpp-compile-run/actions/workflows/ci.yml/badge.png)
 [![Marketplace Version](https://vsmarketplacebadges.dev/version-short/danielpinto8zz6.c-cpp-compile-run.png)](https://marketplace.visualstudio.com/items?itemName=danielpinto8zz6.c-cpp-compile-run)
