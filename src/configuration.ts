@@ -3,7 +3,7 @@ import { FileType } from "./enums/file-type";
 
 export class Configuration {
     static getSetting<T>(name: string): T {
-        return workspace.getConfiguration("c-cpp-compile-run", null).get<T>(name);
+        return workspace.getConfiguration("c-cpp-compile-run-x", null).get<T>(name);
     }
 
     static cCompiler(): string {
@@ -60,6 +60,6 @@ export class Configuration {
 
     static async setCompiler(compiler: string, type: FileType) {
         const key = type === FileType.c ? "c-compiler" : "cpp-compiler";
-        await workspace.getConfiguration("c-cpp-compile-run", null).update(key, compiler, ConfigurationTarget.Global);
+        await workspace.getConfiguration("c-cpp-compile-run-x", null).update(key, compiler, ConfigurationTarget.Global);
     }
 }

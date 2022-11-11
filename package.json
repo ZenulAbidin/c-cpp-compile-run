@@ -1,5 +1,5 @@
 {
-    "name": "c-cpp-compile-run",
+    "name": "c-cpp-compile-run-x",
     "displayName": "C/C++ Compile, Run, & Error Checker",
     "description": "Compile & run c/c++ files, or use it as a compile error checker. It's like ALE and Syntastic on vim.",
     "version": "1.0.20",
@@ -7,7 +7,7 @@
     "author": {
         "name": "Ali Sherief",
         "email": "ali@notatether.com",
-        "url": "https://notatether.com/software/c-cpp-compile-run"
+        "url": "https://notatether.com/software/c-cpp-compile-run-x"
       },
     "icon": "resources/logo.png",
     "engines": {
@@ -25,14 +25,14 @@
         "run"
     ],
     "bugs": {
-        "url": "https://github.com/ZenulAbidin/c-cpp-compile-run/issues",
+        "url": "https://github.com/ZenulAbidin/c-cpp-compile-run-x/issues",
         "email": "ali@notatether.com"
     },
     "license": "GPL-3.0",
-    "homepage": "https://github.com/ZenulAbidin/c-cpp-compile-run/blob/master/README.md",
+    "homepage": "https://github.com/ZenulAbidin/c-cpp-compile-run-x/blob/master/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ZenulAbidin/c-cpp-compile-run.git"
+        "url": "https://github.com/ZenulAbidin/c-cpp-compile-run-x.git"
     },
     "activationEvents": [
         "onCommand:extension.CompileRun",
@@ -220,66 +220,66 @@
         "configuration": {
             "title": "Compile Run configuration",
             "properties": {
-                "c-cpp-compile-run.c-compiler": {
+                "c-cpp-compile-run-x.c-compiler": {
                     "type": "string",
                     "default": "gcc",
                     "description": "The C compiler path (e.g: /usr/bin/gcc or C:\\TDM-GCC-64\\bin\\gcc.exe)",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.cpp-compiler": {
+                "c-cpp-compile-run-x.cpp-compiler": {
                     "type": "string",
                     "default": "g++",
                     "description": "The Cpp compiler path (e.g: /usr/bin/g++ or C:\\TDM-GCC-64\\bin\\gcc.exe)",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.save-before-compile": {
+                "c-cpp-compile-run-x.save-before-compile": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether should save the file before compiling",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.env-vars": {
+                "c-cpp-compile-run-x.env-vars": {
                     "type": "object",
                     "description": "The environment variables to pass to the compiler",
                     "default": {},
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.c-flags": {
+                "c-cpp-compile-run-x.c-flags": {
                     "type": "string",
                     "description": "The C flags: e.g. -Wall. default: -Wall -Wextra",
                     "default": "-Wall -Wextra",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.cpp-flags": {
+                "c-cpp-compile-run-x.cpp-flags": {
                     "type": "string",
                     "description": "The Cpp flags: e.g. -Wall. default: -Wall -Wextra",
                     "default": "-Wall -Wextra",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.working-dir": {
+                "c-cpp-compile-run-x.working-dir": {
                     "type": "string",
                     "description": "The working directory for the compiler",
                     "default": "",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.run-args": {
+                "c-cpp-compile-run-x.run-args": {
                     "type": "string",
                     "description": "Whether should run in an external terminal",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.run-in-external-terminal": {
+                "c-cpp-compile-run-x.run-in-external-terminal": {
                     "type": "boolean",
                     "default": false,
                     "description": "Whether should run in an external terminal",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.should-show-notifications": {
+                "c-cpp-compile-run-x.should-show-notifications": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether should show notifications",
                     "scope": "resource"
                 },
-                "c-cpp-compile-run.output-location": {
+                "c-cpp-compile-run-x.output-location": {
                     "type": "string",
                     "description": "Where output file should be located",
                     "scope": "resource"

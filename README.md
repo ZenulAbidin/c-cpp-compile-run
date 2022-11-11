@@ -28,17 +28,17 @@ You can also set to save file before compiling.
 ## Configurations
 | Key | Description |
 | ------------ | ------------ |
-| c-cpp-compile-run.c-compiler | The C compiler path (e.g: /usr/bin/gcc or C:\\TDM-GCC-64\\bin\\gcc.exe) |
-| c-cpp-compile-run.cpp-compiler | The Cpp compiler path (e.g: /usr/bin/g++ C:\\TDM-GCC-64\\bin\\gcc.exe) |
-| c-cpp-compile-run.save-before-compile | Whether should save the file before compiling |
-| c-cpp-compile-run.env-vars | The environment variables to pass to the compiler |
-| c-cpp-compile-run.c-flags | The C flags: e.g. -Wall. default: -Wall -Wextra |
-| c-cpp-compile-run.cpp-flags | The Cpp flags: e.g. -Wall. default: -Wall -Wextra |
-| c-cpp-compile-run.working-dir | The working directory for the compiler. Defaults to the file path |
-| c-cpp-compile-run.run-args | The run arguments |
-| c-cpp-compile-run.run-in-external-terminal | Whether should run in an external terminal |
-| c-cpp-compile-run.should-show-notifications | Whether should show notifications |
-| c-cpp-compile-run.output-location | Custom output location for the compiled file |
+| c-cpp-compile-run-x.c-compiler | The C compiler path (e.g: /usr/bin/gcc or C:\\TDM-GCC-64\\bin\\gcc.exe) |
+| c-cpp-compile-run-x.cpp-compiler | The Cpp compiler path (e.g: /usr/bin/g++ C:\\TDM-GCC-64\\bin\\gcc.exe) |
+| c-cpp-compile-run-x.save-before-compile | Whether should save the file before compiling |
+| c-cpp-compile-run-x.env-vars | The environment variables to pass to the compiler |
+| c-cpp-compile-run-x.c-flags | The C flags: e.g. -Wall. default: -Wall -Wextra |
+| c-cpp-compile-run-x.cpp-flags | The Cpp flags: e.g. -Wall. default: -Wall -Wextra |
+| c-cpp-compile-run-x.working-dir | The working directory for the compiler. Defaults to the file path |
+| c-cpp-compile-run-x.run-args | The run arguments |
+| c-cpp-compile-run-x.run-in-external-terminal | Whether should run in an external terminal |
+| c-cpp-compile-run-x.should-show-notifications | Whether should show notifications |
+| c-cpp-compile-run-x.output-location | Custom output location for the compiled file |
 
 For the working directory and flags, the following variables have special meanings:
 
