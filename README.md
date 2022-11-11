@@ -2,12 +2,6 @@
 
 # C/C++ Compile Run extension
 
-![Github CI](https://github.com/danielpinto8zz6/c-cpp-compile-run/actions/workflows/ci.yml/badge.png)
-[![Marketplace Version](https://vsmarketplacebadges.dev/version-short/danielpinto8zz6.c-cpp-compile-run.png)](https://marketplace.visualstudio.com/items?itemName=danielpinto8zz6.c-cpp-compile-run)
-[![Downloads](https://vsmarketplacebadges.dev/downloads-short/danielpinto8zz6.c-cpp-compile-run.png)](https://marketplace.visualstudio.com/items?itemName=danielpinto8zz6.c-cpp-compile-run)
-[![Rating](https://vsmarketplacebadges.dev/rating-short/danielpinto8zz6.c-cpp-compile-run.png)](https://marketplace.visualstudio.com/items?itemName=danielpinto8zz6.c-cpp-compile-run)
-
-
 An extension running on [Visual Studio Code](https://code.visualstudio.com) to **Compile & Run** single c/c++ files easily. This is a fork of [danielpinto8zz6/c-cpp-compile-run](https://github.com/danielpinto8zz6/c-cpp-compile-run) that allows for on-demand compile checking of C/C++ files.
 
 ## Features
