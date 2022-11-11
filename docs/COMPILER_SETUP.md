@@ -16,7 +16,7 @@ Install Tdm-gcc via the website. Click [ Tdm-gcc](https://jmeubank.github.io/tdm
 
 - Go to [MSYS2](https://www.msys2.org/) homepage and download the latest installer.
 - Accept the default settings and wait for the program to install
-- Open an MSYS2 terminal and run the following command: `pacman -S gcc` to install gcc and g++. **Warning:** This only works in the MSYS2 terminal, not in any of the others.
+- Open an MSYS2 terminal and run the following command: `pacman -S gcc` to install gcc and g++. **Warning:** pacman only works in the MSYS2 terminal, not in any of the others.
 - Use `pacman -Ss` to search for any 3rd party dependencies that you need to install, and then with `pacman -S`.
 - Go to Control Panel > System > Advanced System Settings. On the Advanced tab, select Change Environment Variables, then add the following path to your PATH:
 `C:\msys64\usr\bin`
