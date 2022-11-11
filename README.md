@@ -65,6 +65,26 @@ For the working directory and flags, the following variables have special meanin
 | f8  | f8 |	cmd+y  | Compiles and run the file in external console  |
 | f7 | f7 | cmd+t | Compiles and run the file specifying custom arguments and flags  |
 
+## Known issues:
+
+- On Linux and possibly macOS, gcc and g++ might fail to find "cc1" and "cc1plus" respectively. You might see an error message such as below:
+
+```
+g++: fatal error: cannot execute 'cc1plus': execvp: No such file or directory
+compilation terminated.
+```
+
+The solution is to explicitly specify the PATH in your environment variable to the "gcc" folder. or add this to your settings.json:
+
+```
+"c-cpp-compile-run-x.env-vars": {
+    "PATH": "/bin:/usr/bin:/usr/lib/gcc/x86_64-linux-gnu/9/"
+}
+```
+
+Please substitute `x86_64-linux-gnu/9` with the folder you see in your system. The folder structure takes the format `/usr/lib(or lib64)/gcc/PLATFORM/GCC_VERSION/`.
+
+
 ## Release Notes
 
 Refer to [CHANGELOG](CHANGELOG.md)
