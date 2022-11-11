@@ -8,7 +8,7 @@
         "name": "Ali Sherief",
         "email": "ali@notatether.com",
         "url": "https://notatether.com/software/c-cpp-compile-run-x"
-      },
+    },
     "icon": "resources/logo.png",
     "engines": {
         "vscode": "^1.73.0"

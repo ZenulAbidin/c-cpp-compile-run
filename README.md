@@ -1,5 +1,13 @@
 ![Logo](resources/logo.png)
 
+
+
+![Github CI](https://github.com/ZenulAbidin/c-cpp-compile-run-x/actions/workflows/ci.yml/badge.svg)
+[![Marketplace Version](https://vsmarketplacebadges.dev/version-short/ZenulAbidin.c-cpp-compile-run-x.png)](https://marketplace.visualstudio.com/items?itemName=ZenulAbidin.c-cpp-compile-run-x)
+[![Downloads](https://vsmarketplacebadges.dev/downloads-short/ZenulAbidin.c-cpp-compile-run-x.png)](https://marketplace.visualstudio.com/items?itemName=ZenulAbidin.c-cpp-compile-run-x)
+[![Rating](https://vsmarketplacebadges.dev/rating-short/ZenulAbidin.c-cpp-compile-run-x.png)](https://marketplace.visualstudio.com/items?itemName=ZenulAbidin.c-cpp-compile-run-x)
+
+
 # C/C++ Compile Run extension
 
 An extension running on [Visual Studio Code](https://code.visualstudio.com) to **Compile & Run** single c/c++ files easily. This is a fork of [danielpinto8zz6/c-cpp-compile-run](https://github.com/danielpinto8zz6/c-cpp-compile-run) that allows for on-demand compile checking of C/C++ files.
