@@ -12,6 +12,17 @@ Install Tdm-gcc via the website. Click [ Tdm-gcc](https://jmeubank.github.io/tdm
 - Choose your **Architecture** and then select **Next** until complete.
 - Restart your vscode
 
+**Important:** Tdm-gcc cannot compile projects with 3rd-party dependencies because the packages themselves are missing. If you have 3rd-party dependencies, you must use MSYS2 instead. This will only work on 64-bit Windows.
+
+- Go to [MSYS2](https://www.msys2.org/) homepage and download the latest installer.
+- Accept the default settings and wait for the program to install
+- Open an MSYS2 terminal and run the following command: `pacman -S gcc` to install gcc and g++. **Warning:** This only works in the MSYS2 terminal, not in any of the others.
+- Use `pacman -Ss` to search for any 3rd party dependencies that you need to install, and then with `pacman -S`.
+- Go to Control Panel > System > Advanced System Settings. On the Advanced tab, select Change Environment Variables, then add the following path to your PATH:
+`C:\msys64\usr\bin`
+- Save the settings and restart vscode
+- In the C/C++ Compile Run settings, change "C compiler" to `C:\msys64\bin\gcc` and "C++ compiler to `C:\msys64\bin\g++`.
+
 ### Linux
 - First, check to see whether GCC is already installed. To verify whether it is, open a Terminal window and enter the following command:
 
