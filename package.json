@@ -3,7 +3,7 @@
     "displayName": "C/C++ Compile, Run, & Error Checker",
     "description": "Compile & run c/c++ files, or use it as a compile error checker. It's like ALE and Syntastic on vim.",
     "version": "1.0.21",
-    "publisher": "zenul_abidin",
+    "publisher": "ZenulAbidin",
     "author": {
         "name": "Ali Sherief",
         "email": "ali@notatether.com",
