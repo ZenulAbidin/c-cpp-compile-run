@@ -61,7 +61,7 @@ For the working directory and flags, the following variables have special meanin
 | Linux  | Windows | Mac | Description  |
 | ------------ | ------------ | ------------ | ------------ |
 | f6  | f6 | cmd+r | Compiles and runs the file  |
-| crtl+6  | ctrl+6 | cmd+6 | Compiles and runs the file  |
+| crtl+6  | ctrl+6 | cmd+6 | Check for compile errors only  |
 | f8  | f8 |	cmd+y  | Compiles and run the file in external console  |
 | f7 | f7 | cmd+t | Compiles and run the file specifying custom arguments and flags  |
 
