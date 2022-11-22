@@ -2,7 +2,7 @@
     "name": "c-cpp-compile-run-x",
     "displayName": "C/C++ Compile, Run, & Error Checker",
     "description": "Compile & run c/c++ files, or use it as a compile error checker. It's like ALE and Syntastic on vim.",
-    "version": "1.0.21",
+    "version": "1.1.0",
     "publisher": "ZenulAbidin",
     "author": {
         "name": "Ali Sherief",
