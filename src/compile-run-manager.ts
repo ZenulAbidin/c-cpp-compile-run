@@ -66,12 +66,15 @@ export class CompileRunManager {
         }
 
         // GCC header file
-        objFile = file.path.replace(/\..*/, ".gch");
-        try {
-            fs.unlinkSync(objFile);
+        // These get humungous so they need to be deleted after
+        // a delay, otherwise if we delete them immediately, they
+        // haven't actually been created yet.
+        const gchFile = file.path + ".gch"
+        setTimeout(() => {try {
+            fs.unlinkSync(gchFile);
         }
         catch {
-        }
+        }}, 1000);
 
         // Nothing at all <Unix binary>
         objFile = file.path.replace(/\..*/, "");
