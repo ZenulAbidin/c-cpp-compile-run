@@ -65,6 +65,14 @@ export class CompileRunManager {
         catch {
         }
 
+        // GCC header file
+        objFile = file.path.replace(/\..*/, ".gch");
+        try {
+            fs.unlinkSync(objFile);
+        }
+        catch {
+        }
+
         // Nothing at all <Unix binary>
         objFile = file.path.replace(/\..*/, "");
         try {
